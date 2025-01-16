@@ -1,6 +1,6 @@
 FROM mlflow:latest
 
-RUN pip install pymysql boto3
+RUN pip install mlflow pymysql boto3
 
 # Set working directory
 WORKDIR /mlflow
