@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mlflow-server
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+      - minio
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server /data
+    ports:
+      - "9000:9000" # MinIO S3 API
+      - "9001:9001" # MinIO Console
+    volumes:
+      - minio_data:/data
+
+volumes:
+  mysql_data:
+  minio_data:
