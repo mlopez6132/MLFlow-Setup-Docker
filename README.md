@@ -7,13 +7,13 @@ Easily deploy an MLflow tracking server with MinIO S3 as the artifact store and 
 1. Clone this repository:
 
    ```bash
-   git clone https://marclopez2@bitbucket.org/atlas-labs/84-horcery-data-experiments.git
+   git clone 
    ```
 
 2. Navigate into the project directory:
 
    ```bash
-   cd 84-horcery-data-experiments
+   cd 
    ```
 
 3. Build and run the containers:
